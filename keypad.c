@@ -6,6 +6,15 @@
  * resistors. Don't forget about other considerations...
  */
 
+#define ROW_1 LATGbits.LATG0
+#define ROW_2 LATFbits.LATF1
+#define ROW_3 LATDbits.LATD12
+#define ROW_4 LATDbits.LATD6
+
+#define COL_1 PORTEbits.RE7
+#define COL_2 PORTEbits.RE5
+#define COL_3 PORTEbits.RE3
+
 /* The pins used for the key pad
  * COL_1      RE7
  * COL_2      RE5
@@ -59,9 +68,87 @@ void initKeypad(void){
  * the key that is pressed. The ascii character c programmatically is just 'c'
  */
 char scanKeypad(void){
+    
     char key = -1;
     
-    return key;
+    int pressed = 0;
     
+    //Scan Row 1
+    ROW_1 = 1; ROW_2 = 0; ROW_3 = 0; ROW_4 = 0;
+    
+    if(COL_1 == 0){
+        key = '1';
+        pressed++;
+    }
+    if(COL_2 == 0){
+        key = '2';
+        pressed++;
+    }
+    if(COL_3 == 0){
+        key = '3';
+        pressed++;
+    }
+    if(pressed > 1){
+        return -1;
+    }
+    
+    //Scan Row 2
+    ROW_1 = 0; ROW_2 = 1; ROW_3 = 0; ROW_4 = 0;
+    
+    if(COL_1 == 0){
+        key = '4';
+        pressed++;
+    }
+    if(COL_2 == 0){
+        key = '5';
+        pressed++;
+    }
+    if(COL_3 == 0){
+        key = '6';
+        pressed++;
+    }
+    if(pressed > 1){
+        return -1;
+    }
+    
+    //Scan Row 3
+    ROW_1 = 0; ROW_2 = 0; ROW_3 = 1; ROW_4 = 0;
+    
+    if(COL_1 == 0){
+        key = '7';
+        pressed++;
+    }
+    if(COL_2 == 0){
+        key = '8';
+        pressed++;
+    }
+    if(COL_3 == 0){
+        key = '9';
+        pressed++;
+    }
+    if(pressed > 1){
+        return -1;
+    }
+    
+    //Scan Row 4
+    ROW_1 = 0; ROW_2 = 0; ROW_3 = 0; ROW_4 = 1;
+    
+    if(COL_1 == 0){
+        key = '*';
+        pressed++;
+    }
+    if(COL_2 == 0){
+        key = '0';
+        pressed++;
+    }
+    if(COL_3 == 0){
+        key = '#';
+        pressed++;
+    }
+    if(pressed > 1){
+        return -1;
+    }
+    
+    return key;
     
 }
