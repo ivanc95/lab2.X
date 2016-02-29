@@ -15,7 +15,7 @@
 #define COL_2 PORTEbits.RE5
 #define COL_3 PORTEbits.RE3
 
-/* The pins used for the key pad
+/* Pins used for the key pad
  * COL_1      RE7
  * COL_2      RE5
  * COL_2      RE3
